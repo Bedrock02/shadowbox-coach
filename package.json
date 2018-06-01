@@ -1,0 +1,23 @@
+{
+  "name": "shadowbox-coach",
+  "version": "1.0.0",
+  "description": "npm package for aka-generator",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "webpack"
+  },
+  "author": "Steven Jimenez",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.17.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "lodash": "^4.17.4",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "uuid": "^3.1.0",
+    "webpack": "^3.8.1"
+  }
+}

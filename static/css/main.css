@@ -1,0 +1,35 @@
+#moveLibrary {
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 30px 0px; }
+  #moveLibrary div {
+    width: 40vw;
+    text-align: center;
+    background-color: #ffc000;
+    margin: 10px 0px; }
+
+#comboBuilder {
+  justify-content: center;
+  text-align: center; }
+  #comboBuilder #comboSandBox {
+    padding: 20px 20px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #ffc000;
+    height: 100px; }
+
+.flex {
+  display: flex; }
+
+.flex-row {
+  flex-direction: row; }
+
+.flex-col {
+  flex-direction: column; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #c1c1c124; }
+
+/*# sourceMappingURL=main.css.map */
