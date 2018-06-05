@@ -1,6 +1,6 @@
 *node_modules*
 *.sass-cache*
-*build*
+*build/*
 *css*
 __pycache__
 package_lock.json
