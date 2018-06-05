@@ -6,7 +6,7 @@
     width: 40vw;
     text-align: center;
     background-color: #ffc000;
-    margin: 10px 0px; }
+    margin: 4px 0px; }
 
 #comboBuilder {
   justify-content: center;
@@ -16,7 +16,80 @@
     border-top: 1px solid;
     border-bottom: 1px solid;
     border-color: #ffc000;
-    height: 100px; }
+    height: 120px;
+    overflow-y: auto; }
+
+#comboSandBox ol {
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  font-size: 1.5em;
+  list-style-position: outside; }
+  #comboSandBox ol li {
+    background-color: #ffc000;
+    min-height: 31px;
+    margin: 10px 0px;
+    width: 30vw;
+    padding: 10px;
+    color: #C00000;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 4%; }
+
+#builderNavButtons {
+  justify-content: space-evenly;
+  font-size: 2em; }
+  #builderNavButtons div {
+    padding: 10px;
+    width: 50vw;
+    text-align: center;
+    font-size: 1.4em; }
+  #builderNavButtons #prev {
+    color: #C00000; }
+  #builderNavButtons #next {
+    color: #C00000; }
+
+#playOptions {
+  justify-content: center;
+  height: 100vh;
+  background-color: #ffc000; }
+  #playOptions div {
+    justify-content: space-evenly;
+    padding: 30px; }
+  #playOptions input[type="number"] {
+    font-size: 2em; }
+  #playOptions input {
+    width: 25vw;
+    text-align: center;
+    height: 8vw; }
+  #playOptions span {
+    font-size: 2em; }
+  #playOptions i {
+    font-size: 3em; }
+
+#restTimer {
+  height: 100vh;
+  justify-content: center;
+  background-color: #C00000;
+  color: #ffc000; }
+  #restTimer div {
+    padding: 0px 20px;
+    text-align: center; }
+
+#restTimer {
+  font-size: 2em; }
+
+#playTimer {
+  height: 100vh;
+  justify-content: center;
+  background-color: #ffc000;
+  color: #C00000;
+  font-size: 2em; }
+  #playTimer div {
+    padding: 0px 20px;
+    text-align: center; }
+
+#playAction ol {
+  padding: 0px 30px; }
 
 .flex {
   display: flex; }

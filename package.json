@@ -19,5 +19,8 @@
     "react-dom": "^16.1.1",
     "uuid": "^3.1.0",
     "webpack": "^3.8.1"
+  },
+  "dependencies": {
+    "moment": "^2.22.2"
   }
 }
