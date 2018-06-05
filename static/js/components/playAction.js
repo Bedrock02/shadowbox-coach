@@ -12,7 +12,7 @@ class PlayAction extends React.Component {
       'repeat': this.props.repeat,
       'current_set': 0,
       'stage': 'rest',
-      'rest_timer': moment(2, 'seconds'),
+      'rest_timer': moment(10, 'seconds'),
       'play_timer': null
     }
   }
@@ -54,7 +54,7 @@ class PlayAction extends React.Component {
         this.setState({
           'stage': 'rest',
           'current_set': this.state.current_set + 1,
-          'rest_timer': moment(2, 'seconds')
+          'rest_timer': moment(10, 'seconds')
         });
         this.startTimer();
       }
@@ -66,7 +66,7 @@ class PlayAction extends React.Component {
         'repeat': false,
         'current_set': 0,
         'stage': 'rest',
-        'rest_timer': moment(2, 'seconds'),
+        'rest_timer': moment(10, 'seconds'),
       });
       this.startTimer();
     }

@@ -1898,7 +1898,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             try {
                 oldLocale = globalLocale._abbr;
                 var aliasedRequire = require;
-                __webpack_require__(149)("./" + name);
+                __webpack_require__(148)("./" + name);
                 getSetGlobalLocale(oldLocale);
             } catch (e) {}
         }
@@ -4473,7 +4473,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     return hooks;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(148)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(147)(module)))
 
 /***/ }),
 /* 1 */
@@ -17434,7 +17434,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(152);
+var isTextNode = __webpack_require__(151);
 
 /*eslint-disable no-bitwise */
 
@@ -17475,7 +17475,7 @@ var _shadowCoach2 = _interopRequireDefault(_shadowCoach);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var React = __webpack_require__(1);
-var ReactDOM = __webpack_require__(150);
+var ReactDOM = __webpack_require__(149);
 
 ReactDOM.render(React.createElement(_shadowCoach2.default, null), document.getElementById('content'));
 
@@ -19873,7 +19873,7 @@ var PlayAction = function (_React$Component) {
       'repeat': _this.props.repeat,
       'current_set': 0,
       'stage': 'rest',
-      'rest_timer': moment(2, 'seconds'),
+      'rest_timer': moment(10, 'seconds'),
       'play_timer': null
     };
     return _this;
@@ -19928,7 +19928,7 @@ var PlayAction = function (_React$Component) {
           this.setState({
             'stage': 'rest',
             'current_set': this.state.current_set + 1,
-            'rest_timer': moment(2, 'seconds')
+            'rest_timer': moment(10, 'seconds')
           });
           this.startTimer();
         }
@@ -19942,7 +19942,7 @@ var PlayAction = function (_React$Component) {
           'repeat': false,
           'current_set': 0,
           'stage': 'rest',
-          'rest_timer': moment(2, 'seconds')
+          'rest_timer': moment(10, 'seconds')
         });
         this.startTimer();
       }
@@ -20053,8 +20053,7 @@ var PlayAction = function (_React$Component) {
 exports.default = PlayAction;
 
 /***/ }),
-/* 147 */,
-/* 148 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20084,7 +20083,7 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 149 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -20349,10 +20348,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 149;
+webpackContext.id = 148;
 
 /***/ }),
-/* 150 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20387,14 +20386,14 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(151);
+  module.exports = __webpack_require__(150);
 } else {
-  module.exports = __webpack_require__(154);
+  module.exports = __webpack_require__(153);
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 151 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22468,7 +22467,7 @@ var vi = { default: qi },
     wi = vi && qi || vi;module.exports = wi.default ? wi.default : wi;
 
 /***/ }),
-/* 152 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22483,7 +22482,7 @@ var vi = { default: qi },
  * @typechecks
  */
 
-var isNode = __webpack_require__(153);
+var isNode = __webpack_require__(152);
 
 /**
  * @param {*} object The object to check.
@@ -22496,7 +22495,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 153 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22527,7 +22526,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 154 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22538,7 +22537,7 @@ module.exports = isNode;
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};if(process.env.NODE_ENV!=="production"){(function(){'use strict';var invariant=__webpack_require__(3);var React=__webpack_require__(1);var warning=__webpack_require__(7);var ExecutionEnvironment=__webpack_require__(132);var _assign=__webpack_require__(5);var emptyFunction=__webpack_require__(4);var checkPropTypes=__webpack_require__(8);var getActiveElement=__webpack_require__(133);var shallowEqual=__webpack_require__(134);var containsNode=__webpack_require__(135);var emptyObject=__webpack_require__(6);var hyphenateStyleName=__webpack_require__(155);var camelizeStyleName=__webpack_require__(157);// Relying on the `invariant()` implementation lets us
+ */var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};if(process.env.NODE_ENV!=="production"){(function(){'use strict';var invariant=__webpack_require__(3);var React=__webpack_require__(1);var warning=__webpack_require__(7);var ExecutionEnvironment=__webpack_require__(132);var _assign=__webpack_require__(5);var emptyFunction=__webpack_require__(4);var checkPropTypes=__webpack_require__(8);var getActiveElement=__webpack_require__(133);var shallowEqual=__webpack_require__(134);var containsNode=__webpack_require__(135);var emptyObject=__webpack_require__(6);var hyphenateStyleName=__webpack_require__(154);var camelizeStyleName=__webpack_require__(156);// Relying on the `invariant()` implementation lets us
 // have preserve the format and params in the www builds.
 !React?invariant(false,'ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.'):void 0;var invokeGuardedCallback=function invokeGuardedCallback(name,func,context,a,b,c,d,e,f){this._hasCaughtError=false;this._caughtError=null;var funcArgs=Array.prototype.slice.call(arguments,3);try{func.apply(context,funcArgs);}catch(error){this._caughtError=error;this._hasCaughtError=true;}};{// In DEV mode, we swap out invokeGuardedCallback for a special version
 // that plays more nicely with the browser's DevTools. The idea is to preserve
@@ -25652,7 +25651,7 @@ var reactDom=ReactDOM$3.default?ReactDOM$3.default:ReactDOM$3;module.exports=rea
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 155 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25667,7 +25666,7 @@ var reactDom=ReactDOM$3.default?ReactDOM$3.default:ReactDOM$3;module.exports=rea
 
 
 
-var hyphenate = __webpack_require__(156);
+var hyphenate = __webpack_require__(155);
 
 var msPattern = /^ms-/;
 
@@ -25694,7 +25693,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 156 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25730,7 +25729,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 157 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25745,7 +25744,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(158);
+var camelize = __webpack_require__(157);
 
 var msPattern = /^-ms-/;
 
@@ -25773,7 +25772,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 158 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
