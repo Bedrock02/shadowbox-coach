@@ -1,27 +1,41 @@
 import React from 'react';
-import BuildState from './buildState.js'
-import PlayState from './playState.js'
+import MoveLibrary from 'components/moveLibrary';
+import ComboBuilder from 'components/comboBuilder';
+import NavButtons from 'components/navButtons';
+import PlayState from 'components/playState';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
+/**
+ *  Component Handles Two Different App Stages
+ * 1. Builder: defines what sets are being made
+ * 2. Option/Play: Sets up workout & Runs workout
+ */
 class ShadowCoach extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      'stage': 'build',
-      'combos': [],
-    }
-    this.handleBuildStateDone = this.handleBuildStateDone.bind(this);
-  }
-  handleBuildStateDone(combos) {
-    this.setState({'stage': 'play', 'combos': combos});
-  }
+  /** Renders State */
   render() {
-    let stage;
-    if(this.state.stage == 'build') {
-      return (<BuildState handleBuildStateDone={this.handleBuildStateDone}/>);
+    const { stage } = this.props;
+    if ( stage === 'build' ) {
+      return (
+        <div>
+          <ComboBuilder />
+          <MoveLibrary />
+          <NavButtons />
+        </div>
+      );
     }
-    else {
-      return(<PlayState combos={this.state.combos}/>);
-    }
+    return ( <PlayState /> );
   }
 }
-export default ShadowCoach;
+ShadowCoach.propTypes = {
+  stage: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = state => ( {
+  stage: state.stage,
+} );
+
+export default connect(
+  mapStateToProps,
+  null,
+)( ShadowCoach );
