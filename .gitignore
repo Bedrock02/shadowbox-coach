@@ -4,3 +4,4 @@
 *css*
 __pycache__
 package_lock.json
+static/js/build/*

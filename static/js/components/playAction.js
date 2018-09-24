@@ -1,103 +1,155 @@
 import React from 'react';
-let moment = require('moment');
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+const moment = require( 'moment' );
+
 let timerId;
 
+/**
+* Stop Timer
+*/
+function stopTimer() {
+  clearInterval( timerId );
+  timerId = null;
+}
+
+/**
+* PlayAction Component
+*/
 class PlayAction extends React.Component {
-  constructor(props) {
-    super(props);
+  /**
+  * Constructor
+  */
+  constructor( props ) {
+    super( props );
+    const {
+      combos,
+      minutes,
+      seconds,
+      repeat,
+    } = this.props;
     this.state = {
-      'combos': this.props.combos,
-      'minutes': this.props.minutes,
-      'seconds': this.props.seconds,
-      'repeat': this.props.repeat,
-      'current_set': 0,
-      'stage': 'rest',
-      'rest_timer': moment(10, 'seconds'),
-      'play_timer': null
-    }
+      currentSet: 0,
+      playTimer: null,
+      restTimer: moment( 10, 'seconds' ),
+      stage: 'rest',
+      combos,
+      minutes,
+      seconds,
+      repeat,
+    };
   }
-  newPlayTimer() {
-    let time, new_play_timer;
-    time = this.state.minutes + ":" + this.state.seconds;
-    new_play_timer = moment(time, 'm:ss');
-    return new_play_timer;
-  }
+
+  /**
+  *  Start Timer Once Mount
+  */
   componentDidMount() {
     this.startTimer();
   }
+
+  /**
+  * Creates a new timer
+  * @returns {Moment obj}
+  */
+  newPlayTimer() {
+    const { minutes, seconds } = this.state;
+    return moment( `${minutes}:${seconds}`, 'm:ss' );
+  }
+
+  /**
+  * Handles Rest Counter
+  */
   countDownRest() {
-    let timeNow, newTime;
-    timeNow = this.state.rest_timer;
-    newTime = timeNow.subtract({"seconds": "1"});
-    this.setState({'rest_timer': newTime});
-    if (newTime.seconds() === 0 && newTime.minutes() === 0) {
-      this.stopTimer();
-      this.setState({
-        'stage': 'play',
-        'play_timer': this.newPlayTimer()
-      });
+    const { restTimer } = this.state;
+    const newTime = restTimer.subtract( { seconds: '1' } );
+    this.setState( { restTimer: newTime } );
+    if ( newTime.seconds() === 0 && newTime.minutes() === 0 ) {
+      stopTimer();
+      this.setState( {
+        stage: 'play',
+        playTimer: this.newPlayTimer(),
+      } );
       this.startTimer();
     }
   }
+
+  /**
+  * Handles Play Counter
+  */
   countDownPlay() {
-    let timeNow, newTime;
-    timeNow = this.state.play_timer;
-    newTime = timeNow.subtract({"seconds": "1"});
-    this.setState({'play_timer': newTime});
+    const { playTimer, currentSet, combos } = this.state;
+    const newTime = playTimer.subtract( { seconds: '1' } );
+    this.setState( { playTimer: newTime } );
     // Timer has reached the end
-    if (newTime.seconds() === 0 && newTime.minutes() === 0) {
-      this.stopTimer();
+    if ( newTime.seconds() === 0 && newTime.minutes() === 0 ) {
+      stopTimer();
       // End of Workout
-      if(this.state.current_set == this.state.combos.length - 1) {
+      if ( currentSet === combos.length - 1 ) {
         this.finishWorkout();
       } else {
-        this.setState({
-          'stage': 'rest',
-          'current_set': this.state.current_set + 1,
-          'rest_timer': moment(10, 'seconds')
-        });
+        this.setState( {
+          stage: 'rest',
+          currentSet: currentSet + 1,
+          restTimer: moment( 10, 'seconds' ),
+        } );
         this.startTimer();
       }
     }
   }
+
+  /**
+  * Handles When Finished
+  */
   finishWorkout() {
-    if(this.state.repeat) {
-      this.setState({
-        'repeat': false,
-        'current_set': 0,
-        'stage': 'rest',
-        'rest_timer': moment(10, 'seconds'),
-      });
+    const { repeat } = this.state;
+    if ( repeat ) {
+      this.setState( {
+        repeat: false,
+        currentSet: 0,
+        stage: 'rest',
+        restTimer: moment( 10, 'seconds' ),
+      } );
       this.startTimer();
     }
   }
-  stopTimer() {
-    clearInterval(timerId);
-    timerId = null;
-  }
+
+  /**
+  * Handles Starting Timer
+  */
   startTimer() {
-    if(this.state.stage == "play") {
-      timerId = setInterval(() => {
+    const { stage } = this.state;
+    if ( stage === 'play' ) {
+      timerId = setInterval( () => {
         this.countDownPlay();
-      }, 1000);
+      }, 1000 );
     } else {
-      timerId = setInterval(() => {
+      timerId = setInterval( () => {
         this.countDownRest();
-      }, 1000);
+      }, 1000 );
     }
   }
+
+  /**
+  * Render
+  */
   render() {
-    let currentCombo, comboMoves;
-    currentCombo = this.state.combos[this.state.current_set];
-    comboMoves = currentCombo.map((move, index) =>
-      <li key={index}>{move}</li>
-    );
-    if(this.state.stage == 'rest') {
-      return(
+    const {
+      combos,
+      currentSet,
+      playTimer,
+      restTimer,
+      stage,
+    } = this.state;
+
+    const currentCombo = combos[currentSet];
+    const comboMoves = currentCombo.map( ( move, index ) => <li key={index}>{move}</li> );
+    if ( stage === 'rest' ) {
+      return (
         <div id="restTimer" className="flex flex-col">
           <div id="restCount">
             <h1>REST</h1>
-            <h2>{this.state.rest_timer.format("s")}</h2>
+            <h2>{restTimer.format( 's' )}</h2>
           </div>
           <div id="nextCombo">
             <h4>Next Combo:</h4>
@@ -105,19 +157,39 @@ class PlayAction extends React.Component {
           </div>
         </div>
       );
-    } else {
-      return(
-        <div id="playTimer" className="flex flex-col">
-        <div>
-          <h1>Set {this.state.current_set + 1}</h1>
-          <h1>{this.state.play_timer.format("m:ss")}</h1>
-        </div>
-          <div>
-            <ol className="flex flex-col">{comboMoves}</ol>
-          </div>
-        </div>
-      )
     }
+    return (
+      <div id="playTimer" className="flex flex-col">
+        <div>
+          <h1>
+            {'Set '}
+            {currentSet + 1}
+          </h1>
+          <h1>{playTimer.format( 'm:ss' )}</h1>
+        </div>
+        <div>
+          <ol className="flex flex-col">{comboMoves}</ol>
+        </div>
+      </div>
+    );
   }
 }
-export default PlayAction;
+
+PlayAction.propTypes = {
+  combos: PropTypes.array.isRequired,
+  minutes: PropTypes.string.isRequired,
+  seconds: PropTypes.string.isRequired,
+  repeat: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = state => ( {
+  combos: state.builder.combos,
+  minutes: state.minutes,
+  seconds: state.seconds,
+  repeat: state.repeat,
+} );
+
+export default connect(
+  mapStateToProps,
+  null,
+)( PlayAction );
