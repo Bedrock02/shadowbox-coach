@@ -1,25 +1,43 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addMove } from 'stores/actions/builder';
+import PropTypes from 'prop-types';
 
+/**
+* Component displays all possible move options
+* When a move is selected, this should trigger an event
+*/
 class MoveLibrary extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {'handleClick': this.props.handleClick};
-    }
-    render() {
-      return (
-        <div id="moveLibrary" className="flex flex-row">
-          <div onClick={this.state.handleClick}><p>Jab</p></div>
-          <div onClick={this.state.handleClick}><p>Cross</p></div>
-          <div onClick={this.state.handleClick}><p>Left Hook</p></div>
-          <div onClick={this.state.handleClick}><p>Right Hook</p></div>
-          <div onClick={this.state.handleClick}><p>Left Uppercut</p></div>
-          <div onClick={this.state.handleClick}><p>Right Uppercut</p></div>
-          <div onClick={this.state.handleClick}><p>Front Kick</p></div>
-          <div onClick={this.state.handleClick}><p>Side Kick</p></div>
-          <div onClick={this.state.handleClick}><p>Round House Kick</p></div>
-          <div onClick={this.state.handleClick}><p>Heel Kick</p></div>
-        </div>
-      )
-    }
+  /** Render */
+  render() {
+    const { handleMoveClick } = this.props;
+    const moves = ['Jab', 'Cross', 'Left Hook', 'Right Hook',
+      'Left Uppercut', 'Right Uppercut', 'Front Kick', 'Side Kick',
+      'Round House Kick', 'Heel Kick',
+    ];
+    const moveOptions = moves.map(
+      ( move, index ) => <div key={move} role="button" tabIndex={index} onKeyPress={handleMoveClick} onClick={handleMoveClick}><p>{move}</p></div>,
+    );
+    return (
+      <div id="moveLibrary" className="flex flex-row">
+        {moveOptions}
+      </div>
+    );
+  }
 }
-export default MoveLibrary
+
+MoveLibrary.propTypes = {
+  handleMoveClick: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ( {
+  handleMoveClick( e ) {
+    const move = e.currentTarget.innerText.trim();
+    dispatch( addMove( { move } ) );
+  },
+} );
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)( MoveLibrary );

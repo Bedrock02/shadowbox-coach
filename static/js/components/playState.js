@@ -1,35 +1,34 @@
 import React from 'react';
-import PlayAction from './playAction.js'
+import PlayAction from 'components/playAction';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {
+  shadowbox,
+  toggleRepeat,
+  minuteChange,
+  secondsChange,
+} from 'stores/actions/main';
 
+/**
+* Component For PlayState
+*/
 class PlayState extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      'repeat': false,
-      'combos': this.props.combos, // change to props
-      'stage': 'options',
-      'minutes': "1",
-      'seconds': "30"
-    };
-    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-    this.handleSecondsChange = this.handleSecondsChange.bind(this);
-    this.handleMinutesChange = this.handleMinutesChange.bind(this);
-    this.handleStart = this.handleStart.bind(this);
-  }
-  handleCheckboxChange(e) {
-    this.setState({'repeat': JSON.parse(e.target.checked)});
-  }
-  handleMinutesChange(e) {
-    this.setState({'minutes': e.target.value});
-  }
-  handleSecondsChange(e) {
-    this.setState({'seconds': e.target.value});
-  }
-  handleStart(){
-    this.setState({'stage': 'play'});
-  }
+  /**
+  * Render
+  */
   render() {
-    if(this.state.stage == 'options') {
+    const {
+      stage,
+      repeat,
+      minutes,
+      seconds,
+      handleCheckboxChange,
+      handleMinutesChange,
+      handleSecondsChange,
+      handleStart,
+    } = this.props;
+
+    if ( stage === 'options' ) {
       return (
         <div id="playOptions" className="flex flex-col">
           <div className="flex flex-row">
@@ -40,42 +39,76 @@ class PlayState extends React.Component {
             <input
               type="checkbox"
               name="repeat"
-              defaultValue={this.state.repeat}
-              onChange={(e) => this.handleCheckboxChange(e)}/>
+              defaultValue={repeat}
+              onChange={e => handleCheckboxChange( e )}
+            />
           </div>
           <div className="flex flex-row">
             <span>Minutes</span>
             <input
               type="number"
               name="minutes"
-              defaultValue={this.state.minutes}
-              onChange={(e) => this.handleMinutesChange(e)}/>
+              defaultValue={minutes}
+              onChange={e => handleMinutesChange( e )}
+            />
           </div>
           <div className="flex flex-row">
             <span>Seconds</span>
             <input
               type="number"
               name="seconds"
-              defaultValue={this.state.seconds}
-              onChange={(e) => this.handleSecondsChange(e)}/>
+              defaultValue={seconds}
+              onChange={e => handleSecondsChange( e )}
+            />
           </div>
-          <div onClick={this.handleStart} className="flex flex-row">
-            <i className="fa fa-play" aria-hidden="true"></i>
+          <div onClick={handleStart} className="flex flex-row">
+            <i className="fa fa-play" aria-hidden="true" />
           </div>
         </div>
       );
     }
-    else {
-      return(
-        <div id="playAction" className="flex flex-col">
-          <PlayAction
-          combos={this.state.combos}
-          minutes={this.state.minutes}
-          seconds={this.state.seconds}
-          repeat={this.state.repeat}/>
-        </div>
-      );
-    }
+
+    return (
+      <div id="playAction" className="flex flex-col">
+        <PlayAction />
+      </div>
+    );
   }
 }
-export default PlayState;
+
+PlayState.propTypes = {
+  stage: PropTypes.string.isRequired,
+  repeat: PropTypes.bool.isRequired,
+  minutes: PropTypes.string.isRequired,
+  seconds: PropTypes.string.isRequired,
+  handleCheckboxChange: PropTypes.func.isRequired,
+  handleMinutesChange: PropTypes.func.isRequired,
+  handleSecondsChange: PropTypes.func.isRequired,
+  handleStart: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ( {
+  repeat: state.repeat,
+  combos: state.builder.combos,
+  stage: state.stage,
+  minutes: state.minutes,
+  seconds: state.seconds,
+} );
+const mapDispatchToProps = dispatch => ( {
+  handleCheckboxChange( e ) {
+    dispatch( toggleRepeat( { repeat: JSON.parse( e.target.checked ) } ) );
+  },
+  handleMinutesChange( e ) {
+    dispatch( minuteChange( { minutes: e.target.value } ) );
+  },
+  handleSecondsChange( e ) {
+    dispatch( secondsChange( { seconds: e.target.value } ) );
+  },
+  handleStart() {
+    dispatch( shadowbox() );
+  },
+} );
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)( PlayState );

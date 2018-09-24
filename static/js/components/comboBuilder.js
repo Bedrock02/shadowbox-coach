@@ -1,39 +1,52 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+/**
+* ComboBuilder Component
+*/
 class ComboBuilder extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  static getDerivedStateFromProps(props, state) {
-    return {
-      'set_number': props.set_number,
-      'current_combo': props.current_combo
-    };
-  }
-  componentDidUpdate(prevProps, prevState) {
-    let element = document.getElementById('moveList');
-    if(element.lastChild){
-        element.lastChild.scrollIntoView({'behavior': 'smooth'});
+  /**
+  * ComponentDidUpdate Listener
+  */
+  componentDidUpdate( ) {
+    const element = document.getElementById( 'moveList' );
+    if ( element.lastChild ) {
+      element.lastChild.scrollIntoView( { behavior: 'smooth' } );
     }
   }
+
+  /**
+  * Render
+  */
   render() {
-    let combo_moves, display_set_number;
-    display_set_number = this.state.set_number + 1
-    if(this.state.current_combo) {
-      combo_moves = this.state.current_combo.map((move, index) =>
-        <li key={index}>{move}</li>
-      );
-    }
+    const { currentCombo, currentSetNumber } = this.props;
+    const comboMoves = currentCombo ? (
+      currentCombo.map( ( move, index ) => <li key={index}>{move}</li> )
+    ) : ( null );
     return (
       <div id="comboBuilder" className="flex flex-col">
-        <h1>Set {display_set_number}</h1>
+        <h1>
+          {'Set '}
+          { currentSetNumber }
+        </h1>
         <div id="comboSandBox">
-          <ol id="moveList" className="flex flex-col">{combo_moves}</ol>
+          <ol id="moveList" className="flex flex-col">{ comboMoves }</ol>
         </div>
       </div>
     );
   }
 }
+ComboBuilder.propTypes = {
+  currentCombo: PropTypes.array,
+  currentSetNumber: PropTypes.number.isRequired,
+};
 
-export default ComboBuilder;
+const mapStateToProps = state => ( {
+  currentSetNumber: state.builder.currentSetNumber + 1,
+  currentCombo: state.builder.currentCombo,
+} );
+
+export default connect(
+  mapStateToProps,
+  null,
+)( ComboBuilder );

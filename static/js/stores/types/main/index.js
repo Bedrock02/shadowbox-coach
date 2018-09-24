@@ -1,0 +1,5 @@
+export const DONE_BUILDING = 'DONE';
+export const SHADOWBOX = 'SHADOWBOX';
+export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';
+export const MINUTE_CHANGE = 'MINUTE_CHANGE';
+export const SECONDS_CHANGE = 'SECONDS_CHANGE';
